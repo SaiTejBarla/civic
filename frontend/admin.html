@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicEye AI - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>CivicEye AI - Admin Dashboard</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+    <!-- Dashboard Stats -->
+    <section class="stats">
+
+        <div class="card">
+            <h3>Total Reports</h3>
+            <p id="totalReports">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Pending</h3>
+            <p id="pendingReports">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Resolved</h3>
+            <p id="resolvedReports">0</p>
+        </div>
+
+    </section>
+
+    <!-- Search -->
+    <section class="search-section">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search reports..."
+        >
+
+        <button id="searchBtn">
+            Search
+        </button>
+
+    </section>
+
+    <!-- Reports -->
+    <section class="reports">
+
+        <h2>Reports</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Assigned Officer</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="reportsTable">
+                <!-- Loaded dynamically by admin.js -->
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- Users -->
+    <section class="users">
+
+        <h2>Users</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="usersTable">
+                <!-- Loaded dynamically by admin.js -->
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- Assign Officer Modal -->
+    <div id="assignModal" class="modal" style="display: none;">
+
+        <div class="modal-content">
+
+            <h2>Assign Officer</h2>
+
+            <input
+                type="hidden"
+                id="assignReportId"
+            >
+
+            <label for="officerSelect">
+                Select Officer
+            </label>
+
+            <select id="officerSelect">
+                <option value="">
+                    Select an Officer
+                </option>
+            </select>
+
+            <br><br>
+
+            <div class="modal-buttons">
+
+                <button id="confirmAssignBtn">
+                    Assign Officer
+                </button>
+
+                <button id="closeAssignBtn">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>

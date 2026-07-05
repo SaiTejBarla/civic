@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicEye AI - Officer Dashboard</title>
+
+    <link rel="stylesheet" href="officer.css">
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>🏛 CivicEye AI - Officer Dashboard</h1>
+
+        <p>Welcome, Officer</p>
+
+    </header>
+
+    <hr>
+
+    <!-- ==========================================
+         Dashboard Statistics
+    =========================================== -->
+
+    <section id="stats">
+
+        <div>
+            <h3>Pending</h3>
+            <span id="pendingCount">0</span>
+        </div>
+
+        <div>
+            <h3>In Progress</h3>
+            <span id="progressCount">0</span>
+        </div>
+
+        <div>
+            <h3>Resolved</h3>
+            <span id="completedCount">0</span>
+        </div>
+
+        <div>
+            <h3>Total Reports</h3>
+            <span id="totalCount">0</span>
+        </div>
+
+    </section>
+
+    <hr>
+
+    <!-- ==========================================
+         Search & Filter
+    =========================================== -->
+
+    <section>
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search reports..."
+        >
+
+        <select id="statusFilter">
+
+            <option value="">All Status</option>
+
+            <option>Pending</option>
+
+            <option>Assigned</option>
+
+            <option>In Progress</option>
+
+            <option>Resolved</option>
+
+            <option>Rejected</option>
+
+        </select>
+
+    </section>
+
+    <hr>
+
+    <!-- ==========================================
+         OpenStreetMap
+    =========================================== -->
+
+    <section>
+
+        <h2>Complaint Map</h2>
+
+        <div id="map"></div>
+
+    </section>
+
+    <hr>
+
+    <!-- ==========================================
+         Reports
+    =========================================== -->
+
+    <section>
+
+        <h2>Assigned Reports</h2>
+
+        <div id="complaintsContainer">
+
+            <!-- Loaded from officer.js -->
+
+        </div>
+
+    </section>
+
+    <hr>
+
+    <!-- ==========================================
+         Report Details
+    =========================================== -->
+
+    <section>
+
+        <h2>Report Details</h2>
+
+        <p>
+            <strong>Report ID:</strong>
+            <span id="complaintId">-</span>
+        </p>
+
+        <p>
+            <strong>Category:</strong>
+            <span id="category">-</span>
+        </p>
+
+        <p>
+            <strong>Description:</strong>
+        </p>
+
+        <p id="description">
+
+            Select a report.
+
+        </p>
+
+        <br>
+
+        <label>
+
+            <strong>Status</strong>
+
+        </label>
+
+        <select id="status">
+
+            <option>Pending</option>
+
+            <option>Assigned</option>
+
+            <option>In Progress</option>
+
+            <option>Resolved</option>
+
+            <option>Rejected</option>
+
+        </select>
+
+        <br>
+
+        <textarea
+
+            id="remarks"
+
+            rows="5"
+
+            placeholder="Officer remarks..."
+
+        ></textarea>
+
+        <br>
+
+        <button id="updateBtn">
+
+            Update Report
+
+        </button>
+
+    </section>
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+/>
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+/>
+
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <!-- Map Logic -->
+    <script src="maps.js"></script>
+
+    <!-- Officer Logic -->
+    <script src="officer.js"></script>
+
+</body>
+
+</html>

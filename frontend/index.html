@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicEye AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         Header
+    ========================== -->
+
+    <header>
+        <h1>🏛️ CivicEye AI</h1>
+        <p>AI-Powered Civic Issue Reporting System</p>
+    </header>
+
+    <!-- =========================
+         Authentication Container
+    ========================== -->
+
+    <div class="container">
+
+        <!-- Login Form -->
+
+        <div id="loginSection">
+
+            <h2>Login</h2>
+
+            <form id="loginForm">
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p>
+                <a href="#" id="forgotPassword">
+                    Forgot Password?
+                </a>
+            </p>
+
+            <p>
+                Don't have an account?
+                <a href="#" id="showRegister">
+                    Register
+                </a>
+            </p>
+
+        </div>
+
+        <!-- Register Form -->
+
+        <div id="registerSection" style="display:none;">
+
+            <h2>Create Account</h2>
+
+            <form id="registerForm">
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    required
+                >
+
+                <button type="submit">
+                    Register
+                </button>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="#" id="showLogin">
+                    Login
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 CivicEye AI | Smart Infrastructure Monitoring
+        </p>
+
+    </footer>
+
+    <!-- =========================
+         Firebase
+    ========================== -->
+
+    <script type="module" src="firebase.js"></script>
+
+    <!-- =========================
+         Authentication Logic
+    ========================== -->
+
+    <script type="module" src="auth.js"></script>
+
+</body>
+</html>

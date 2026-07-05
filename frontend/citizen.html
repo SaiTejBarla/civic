@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Citizen Dashboard | CivicEye AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>🏛️ CivicEye AI</h1>
+
+        <p>Citizen Dashboard</p>
+
+    </header>
+
+    <div class="container">
+
+        <h2>Report an Issue</h2>
+
+        <form id="reportForm">
+
+            <!-- Images -->
+
+            <label for="images">
+
+                Upload Images (Maximum 7)
+
+            </label>
+
+            <input
+                type="file"
+                id="images"
+                multiple
+                accept=".jpg,.jpeg,.png"
+                required
+            >
+
+            <!-- Description -->
+
+            <label for="description">
+
+                Description
+
+            </label>
+
+            <textarea
+                id="description"
+                rows="5"
+                placeholder="Describe the issue..."
+                required
+            ></textarea>
+
+            <!-- Landmark -->
+
+            <label for="landmark">
+
+                Nearest Landmark
+
+            </label>
+
+            <input
+                type="text"
+                id="landmark"
+                placeholder="Example: Near AU Main Gate"
+            >
+
+            <!-- GPS -->
+
+            <label>
+
+                Current Location
+
+            </label>
+
+            <p id="locationStatus">
+
+                📍 Detecting your current location...
+
+            </p>
+
+            <!-- Hidden Coordinates -->
+
+            <input
+                type="hidden"
+                id="latitude"
+            >
+
+            <input
+                type="hidden"
+                id="longitude"
+            >
+
+            <!-- Submit -->
+
+            <button
+                type="submit"
+                id="submitBtn"
+            >
+
+                Submit Report
+
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>My Reports</h2>
+
+        <div id="reports">
+
+            <p>
+
+                No reports submitted yet.
+
+            </p>
+
+        </div>
+
+        <br>
+
+        <button id="logoutBtn">
+
+            Logout
+
+        </button>
+
+    </div>
+
+        <script type="module">
+
+        import { auth } from "./firebase.js";
+
+        import {
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        // =====================================================
+        // DOM Elements
+        // =====================================================
+
+        const reportForm = document.getElementById("reportForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        const latitude = document.getElementById("latitude");
+        const longitude = document.getElementById("longitude");
+
+        const locationStatus = document.getElementById("locationStatus");
+
+        // =====================================================
+        // Get User Location
+        // =====================================================
+
+        function getLocation() {
+
+            if (!navigator.geolocation) {
+
+                locationStatus.innerHTML =
+                    "❌ Geolocation is not supported.";
+
+                return;
+
+            }
+
+            locationStatus.innerHTML =
+                "📍 Detecting location...";
+
+            navigator.geolocation.getCurrentPosition(
+
+                (position) => {
+
+                    latitude.value = position.coords.latitude;
+
+                    longitude.value = position.coords.longitude;
+
+                    locationStatus.innerHTML =
+                        "✅ Location detected successfully.";
+
+                },
+
+                (error) => {
+
+                    console.error(error);
+
+                    locationStatus.innerHTML =
+                        "❌ Please allow location access.";
+
+                }
+
+            );
+
+        }
+
+        getLocation();
+
+        // =====================================================
+        // Submit Report
+        // =====================================================
+
+        reportForm.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+
+            submitBtn.innerHTML = "Submitting...";
+
+            try {
+
+                const token = localStorage.getItem("firebaseToken");
+
+                if (!token) {
+
+                    alert("Please login again.");
+
+                    window.location.href = "index.html";
+
+                    return;
+
+                }
+
+                const files =
+                    document.getElementById("images").files;
+
+                if (files.length === 0) {
+
+                    alert("Please upload at least one image.");
+
+                    return;
+
+                }
+
+                if (files.length > 7) {
+
+                    alert("Maximum 7 images are allowed.");
+
+                    return;
+
+                }
+
+                const formData = new FormData();
+
+                for (let i = 0; i < files.length; i++) {
+
+                    formData.append(
+                        "images",
+                        files[i]
+                    );
+
+                }
+
+                formData.append(
+                    "description",
+                    document.getElementById("description").value
+                );
+
+                formData.append(
+                    "landmark",
+                    document.getElementById("landmark").value
+                );
+
+                formData.append(
+                    "latitude",
+                    latitude.value
+                );
+
+                formData.append(
+                    "longitude",
+                    longitude.value
+                );
+
+                const response = await fetch(
+
+                    "http://127.0.0.1:5000/analyze",
+
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            Authorization:
+                                `Bearer ${token}`
+
+                        },
+
+                        body: formData
+
+                    }
+
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.message || "Submission failed."
+                    );
+
+                }
+
+                alert(
+
+`✅ Report Submitted Successfully
+
+Report ID:
+${result.report.reportId}
+
+Issue:
+${result.report.issue}
+
+Department:
+${result.report.department}
+
+Priority:
+${result.report.priority}
+
+Status:
+${result.report.status}`
+
+                );
+
+                reportForm.reset();
+
+                getLocation();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(error.message);
+
+            }
+
+            finally {
+
+                submitBtn.disabled = false;
+
+                submitBtn.innerHTML =
+                    "Submit Report";
+
+            }
+
+        });
+
+        // =====================================================
+        // Logout
+        // =====================================================
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", async () => {
+
+                await signOut(auth);
+
+                localStorage.removeItem("firebaseToken");
+
+                window.location.href =
+                    "index.html";
+
+            });
+
+    </script>
+
+</body>
+
+</html>

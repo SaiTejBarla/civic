@@ -1,0 +1,248 @@
+/* ==========================================
+   Google Font
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   Global Styles
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+header{
+
+    width:100%;
+    text-align:center;
+
+    padding:40px 20px 20px;
+
+}
+
+header h1{
+
+    font-size:2.8rem;
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+header p{
+
+    font-size:1.05rem;
+
+    opacity:.9;
+
+}
+
+/* ==========================================
+   Authentication Card
+========================================== */
+
+.container{
+
+    width:100%;
+    max-width:430px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    margin:30px 20px;
+
+}
+
+/* ==========================================
+   Headings
+========================================== */
+
+.container h2{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    font-size:2rem;
+
+}
+
+/* ==========================================
+   Forms
+========================================== */
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    background:#fff;
+
+    color:#222;
+
+    transition:.3s;
+
+}
+
+input:focus{
+
+    box-shadow:0 0 0 3px rgba(59,130,246,.4);
+
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    background:#2563eb;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   Links
+========================================== */
+
+p{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:14px;
+
+}
+
+a{
+
+    color:#93c5fd;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   Footer
+========================================== */
+
+footer{
+
+    width:100%;
+
+    text-align:center;
+
+    padding:20px;
+
+    font-size:14px;
+
+    opacity:.8;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:500px){
+
+    header h1{
+
+        font-size:2rem;
+
+    }
+
+    .container{
+
+        width:92%;
+
+        padding:25px;
+
+    }
+
+}
